@@ -13,16 +13,85 @@ interface LegacyRocketInfoProps {
   crew: CrewMember[];
 }
 
-const RocketDepartureBoard = ({ rockets, routeInfo }) => {
+// ----
+
+type RocketInfo = Omit<LegacyRocketInfoProps, "age">;
+
+interface RouteInfo {
+  name: string;
+  route: {
+    origin: string;
+    destination: string;
+  };
+}
+
+const getRouteName = (
+  rockets: RocketInfo,
+  routeInfo: RouteInfo[]
+) => {
+  let rocketRouteDict: { rocketName: string; route: string }[] = [];
+  let allRoute = "";
+  routeInfo.filter((route) => {
+    if (rockets.name === route.name) {
+      rocketRouteDict.push({
+        rocketName: rockets.name,
+        route: `${route.route.origin} to ${route.route.destination}`,
+      });
+    }
+  });
+  if (rocketRouteDict.length == 0) {
+    return <p> Waiting for next schedule ... </p>;
+  }
+  for (let i = 0; i < rocketRouteDict.length; i++) {
+    allRoute += rocketRouteDict[i].route + " ";
+  }
+  return allRoute;
+};
+
+// One Rocket may have multiple route
+// There are multiple rockets 1~6.
+interface RocketDepartureProps {
+  rockets: RocketInfo[];
+  routeInfo: RouteInfo[];
+}
+
+const RocketDepartureBoard = ({
+  rockets,
+  routeInfo,
+}: RocketDepartureProps) => {
   //TODO: Implement a departure board of three column
   // In the first column should be the rocket's name
   // In the second column should be the rocket's crew info
   // In the third column should be the rocket's route info
-  return;
+  return (
+    <table>
+      <tr>
+        <th>Rocket Name</th>
+        <th>Crew Info</th>
+        <th>Route</th>
+      </tr>
+
+      {rockets.map((rocket) => {
+        return (
+          <tr>
+            <td>{rocket.name}</td>
+            <td>
+              {rocket.crew.map((crew) => (
+                <p>
+                  Name: {crew.name} Role: {crew.role}
+                </p>
+              ))}
+            </td>
+            <td>{getRouteName(rocket, routeInfo)}</td>
+          </tr>
+        );
+      })}
+    </table>
+  );
 };
 
 export const Checkpoint1Q = () => {
-  const rockets = [
+  const rockets: RocketInfo[] = [
     {
       name: "Roam 1",
       crew: [

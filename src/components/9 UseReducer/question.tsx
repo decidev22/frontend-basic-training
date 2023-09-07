@@ -2,12 +2,26 @@
 
 import React from "react";
 
-const Clickable = ({ handleClick, label }) => {
+interface ClickableProps {
+  handleClick: () => void;
+  label: string;
+}
+
+const Clickable = ({ handleClick, label }: ClickableProps) => {
   return <button onClick={handleClick}>{label}</button>;
 };
 
-const reducer = (state, action) => {
+const reducer = (state: { count: number }, action: string) => {
   //TODO: create a reducer that accept two types of actions - 'increment' and 'decrement'
+  if (action === "increment") {
+    return { count: state.count + 1 };
+  }
+  if (action === "decrement") {
+    return { count: state.count - 1 };
+  } else {
+    throw Error;
+  }
+  return state;
 };
 
 export const UseReducerQ = () => {
@@ -16,8 +30,14 @@ export const UseReducerQ = () => {
     <>
       <h2>Exercise 13</h2>
       <h3>{state.count}</h3>
-      <Clickable handleClick={() => dispatch("increment")} label="+" />
-      <Clickable handleClick={() => dispatch("decrement")} label="-" />
+      <Clickable
+        handleClick={() => dispatch("increment")}
+        label="+"
+      />
+      <Clickable
+        handleClick={() => dispatch("decrement")}
+        label="-"
+      />
       {/* THIS SHOULD THROW TYPESCRIPT ERROR => <Clickable handleClick={() => dispatch("nothing")} label="-" /> */}
     </>
   );

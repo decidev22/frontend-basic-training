@@ -1,13 +1,22 @@
 //TODO: Add typescript to this file
 
-import React from "react";
+import React, { useState } from "react";
 
-const Clickable = ({ handleClick, label }) => {
+interface ClickableProps {
+  handleClick: () => void;
+  label: string;
+}
+
+const Clickable = ({ handleClick, label }: ClickableProps) => {
   return <button onClick={handleClick}>{label}</button>;
 };
 
-const useCounter = (initialValue) => {
+const useCounter = (initialValue: number) => {
   //TODO: create a custom hook
+  const [count, setCount] = useState(initialValue);
+  const increment = () => setCount(count + 1);
+  const decrement = () => setCount(count - 1);
+  return { count, increment, decrement };
 };
 
 export const CustomHookQ = () => {

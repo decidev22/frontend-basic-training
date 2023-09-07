@@ -1,22 +1,29 @@
 // TODO: Add inline typing to these components
 
 // Name should accept a parameter of string
-const RocketName = ({ name }) => {
+const RocketName = ({ name }: { name: string }) => {
   return <label>Name: {name}</label>;
 };
 
 // ShowAge should accept a age parameter of number
-function RocketAge({ age }) {
+function RocketAge({ age }: { age: number }) {
   return <label>Age: {age}</label>;
 }
 
 // There are three sizes "L", "M" and "S". It could be any one of the three
-function RocketSize({ size }) {
+// interface RocketSizeProps {
+//   size: "L"|"M"|"S"
+// }
+
+// Had moderate hard time, tried interface but found out you cannot really do it with 'funciton'.
+function RocketSize({ size }: { size: "L" | "M" | "S" }) {
   return <label>Size: {size}</label>;
 }
 
 // SerialNumber should accept a string that starts with 'ROAM-'.
-function SerialNumber({ serial }) {
+// I had no idea how to appraoch this at first.
+
+function SerialNumber({ serial }: { serial: `ROAM-${string}` }) {
   return <label>Serial: {serial}</label>;
 }
 

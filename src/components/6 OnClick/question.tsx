@@ -1,6 +1,10 @@
 //TODO: Add typescript to this file
 
-const Clickable = ({ handleClick }) => {
+interface ClickableProps {
+  handleClick: () => void;
+}
+
+const Clickable: React.FC<ClickableProps> = ({ handleClick }) => {
   return <button onClick={handleClick}>Click Me!</button>;
 };
 

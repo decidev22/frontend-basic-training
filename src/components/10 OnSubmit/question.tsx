@@ -4,18 +4,27 @@
 
 import React from "react";
 
-const Clickable = ({ handleClick }) => {
+interface ClickableProps {
+  handleClick: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+const Clickable = ({ handleClick }: ClickableProps) => {
   return <button onClick={handleClick}>Click Me!</button>;
 };
 
 export const OnSubmitQ = () => {
   const [count, setCount] = React.useState<number>(0);
-  const handleClick = (e) => {
+  const handleClick: React.MouseEventHandler<HTMLButtonElement> = (
+    e
+  ) => {
     setCount(count + 1);
   };
 
-  const handleSubmit = (e) => {
-    //TODO: Implement
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (
+    e
+  ) => {
+    e.preventDefault();
+    console.log(count, "submitted");
   };
 
   return (
