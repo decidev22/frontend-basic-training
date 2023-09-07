@@ -7,6 +7,14 @@ interface RocketInfoProps {
   pilot: PilotInfo;
 }
 
+// This is very useful!
+type RocketSizes = "L" | "M" | "S";
+
+interface PilotInfo {
+  firstName: string;
+  lastName: string;
+}
+
 const RocketInfo = ({ name, age, size, pilot }: RocketInfoProps) => (
   <>
     <ul>
@@ -20,7 +28,9 @@ const RocketInfo = ({ name, age, size, pilot }: RocketInfoProps) => (
         <label>Size: {size}</label>
       </li>
       <li>
-        <label>Pilot: {`${pilot.firstName} ${pilot.lastName}`} </label>
+        <label>
+          Pilot: {`${pilot.firstName} ${pilot.lastName}`}{" "}
+        </label>
       </li>
     </ul>
   </>

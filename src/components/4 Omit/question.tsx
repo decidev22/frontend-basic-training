@@ -12,7 +12,14 @@ interface PlaneInfo {
 // TODO: Create a RocketInfo type by inheriting from the PlaneInfo interface,
 // except Rocekets don't have wings, so we need to not have the 'wingspan' prop
 // in RocketInfo;
-interface RocketInfo {}
+
+// interface RocketInfo {
+//    !! Could not find a way to make an interface take Omit.
+// }
+
+// Referring to TypeScript Documentation Omit
+
+type RocketInfo = Omit<PlaneInfo, "wingspan">;
 
 const Bob: RocketInfo = {
   name: "bob",
